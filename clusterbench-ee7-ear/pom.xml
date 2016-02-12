@@ -77,6 +77,18 @@
                             <classifier>granular</classifier>
                             <contextRoot>/clusterbench-granular</contextRoot>
                         </webModule>
+                        <webModule>
+                            <groupId>org.jboss.test</groupId>
+                            <artifactId>clusterbench-ee7-web</artifactId>
+                            <classifier>offload</classifier>
+                            <contextRoot>/clusterbench-offload</contextRoot>
+                            <!--
+                              - certain databases impose a severe limit on identifier length,
+                              - and since the table name in the JDBC-based cache store is
+                              - derived from the cache name, let's make the cache name short
+                              -->
+                            <bundleFileName>cb.war</bundleFileName>
+                        </webModule>
                     </modules>
                 </configuration>
             </plugin>
@@ -109,6 +121,13 @@
             <artifactId>clusterbench-ee7-web</artifactId>
             <version>${project.version}</version>
             <classifier>granular</classifier>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.test</groupId>
+            <artifactId>clusterbench-ee7-web</artifactId>
+            <version>${project.version}</version>
+            <classifier>offload</classifier>
             <type>war</type>
         </dependency>
     </dependencies>

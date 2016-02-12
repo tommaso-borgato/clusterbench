@@ -160,6 +160,25 @@
                             </archive>
                         </configuration>
                     </execution>
+                    <!-- Build offload configuration: passivation enabled and a special offload cache. -->
+                    <execution>
+                        <phase>package</phase>
+                        <id>build-offload-war</id>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>offload</classifier>
+                            <webappDirectory>${project.build.directory}/${project.build.finalName}-offload</webappDirectory>
+                            <warSourceDirectory>${basedir}/src/main/webapp-offload</warSourceDirectory>
+                            <packagingExcludes>%regex[.*granular.*]</packagingExcludes>
+                            <archive>
+                                <manifestEntries>
+                                    <Dependencies>org.infinispan, org.jgroups</Dependencies>
+                                </manifestEntries>
+                            </archive>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
