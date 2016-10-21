@@ -22,6 +22,7 @@
 
     <replication-config>
         <replication-granularity>ATTRIBUTE</replication-granularity>
+	<cache-name>web.offload</cache-name>
     </replication-config>
 
 </jboss-web>

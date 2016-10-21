@@ -75,7 +75,7 @@
                             <groupId>org.jboss.test</groupId>
                             <artifactId>clusterbench-ee7-web</artifactId>
                             <classifier>granular</classifier>
-                            <contextRoot>/clusterbench-granular</contextRoot>
+                            <contextRoot>/clusterbench-granularoffload</contextRoot>
                         </webModule>
                         <webModule>
                             <groupId>org.jboss.test</groupId>
