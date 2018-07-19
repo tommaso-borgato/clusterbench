@@ -64,18 +64,21 @@
                             <artifactId>clusterbench-ee7-web</artifactId>
                             <classifier>default</classifier>
                             <contextRoot>/clusterbench</contextRoot>
+                            <bundleFileName>a.war</bundleFileName>
                         </webModule>
                         <webModule>
                             <groupId>org.jboss.test</groupId>
                             <artifactId>clusterbench-ee7-web</artifactId>
                             <classifier>passivating</classifier>
                             <contextRoot>/clusterbench-passivating</contextRoot>
+                            <bundleFileName>b.war</bundleFileName>
                         </webModule>
                         <webModule>
                             <groupId>org.jboss.test</groupId>
                             <artifactId>clusterbench-ee7-web</artifactId>
                             <classifier>granular</classifier>
                             <contextRoot>/clusterbench-granularoffload</contextRoot>
+                            <bundleFileName>c.war</bundleFileName>
                         </webModule>
                         <webModule>
                             <groupId>org.jboss.test</groupId>
@@ -87,7 +90,7 @@
                               - and since the table name in the JDBC-based cache store is
                               - derived from the cache name, let's make the cache name short
                               -->
-                            <bundleFileName>cb.war</bundleFileName>
+                            <bundleFileName>d.war</bundleFileName>
                         </webModule>
                     </modules>
                 </configuration>
