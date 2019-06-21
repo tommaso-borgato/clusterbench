@@ -204,6 +204,7 @@
         </profile>
         <profile>
             <!-- shortens name of bundled JARs and WARs -->
+            <!-- mvn clean install -P ee8,short-names -->
             <id>short-names</id>
             <build>
                 <plugins>
