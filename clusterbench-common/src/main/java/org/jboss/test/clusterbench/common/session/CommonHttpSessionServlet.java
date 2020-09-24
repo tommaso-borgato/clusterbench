@@ -61,6 +61,7 @@ public class CommonHttpSessionServlet extends HttpServlet {
             return;
         }
 
+        if (bean==null) log.log(Level.SEVERE, "Session {0} with null attribute {1}", new Object[]{session.getId(), KEY});
         int serial = bean.getSerial();
         bean.setSerial(serial + 1);
 
