@@ -43,6 +43,8 @@ public class DebugServlet extends AbstractCommonDebugServlet {
 
         // Get current cache nodes
         info.append("Members: ").append(container.getMembers()).append(System.getProperty("line.separator"));
+        // Get current node
+        info.append("Member: ").append(container.getAddress()).append(System.getProperty("line.separator"));
 
         info.append("Physical addresses: ");
         JGroupsTransport transport = (JGroupsTransport) container.getTransport();
