@@ -42,7 +42,7 @@
     <properties>
         <linkXRef>false</linkXRef>
         <version.org.infinispan>11.0.1.Final</version.org.infinispan>
-        <version.org.wildfly>20.0.1.Final</version.org.wildfly>
+        <version.org.wildfly>21.0.1.Final</version.org.wildfly>
         <version.org.wildfly.maven.plugin>2.0.2.Final</version.org.wildfly.maven.plugin>
     </properties>
 
@@ -76,7 +76,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.13</version>
+                <version>4.13.1</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
