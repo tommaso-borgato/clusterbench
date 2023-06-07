@@ -32,6 +32,24 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <wildfly.skip>false</wildfly.skip>
+        <!-- WildFly/EAP 8 Maven Plugin coordinates -->
+        <wildfly-maven-plugin.groupId>org.wildfly.plugins</wildfly-maven-plugin.groupId>
+        <wildfly-maven-plugin.artifactId>wildfly-maven-plugin</wildfly-maven-plugin.artifactId>
+        <wildfly-maven-plugin.version>4.0.0.Final</wildfly-maven-plugin.version>
+        <!--
+            EAP8 feature packs and channel:
+
+                - EAP = org.jboss.eap:wildfly-ee-galleon-pack (only EE specs included)
+                - EAP XP = org.jboss.eap:wildfly-galleon-pack (EE specs as well as MP specs)
+                - WF = org.wildfly:wildfly-galleon-pack (EE specs as well as MP specs)
+
+            Note 1: WF builds have both `wildfly-galleon-pack` and `wildfly-ee-galleon-pack`
+            Note 2: leave the feature-packs location to non-existing location, this proves parameters are passed correctly to the builder image
+        -->
+        <wildfly.feature-pack.location>org.wildfly:wildfly-galleon-pack:27.0.0.Final</wildfly.feature-pack.location>
+        <wildfly.ee-feature-pack.location>org.wildfly:wildfly-ee-galleon-pack:27.0.0.Final</wildfly.ee-feature-pack.location>
+        <wildfly.cloud-feature-pack.location>org.wildfly.cloud:wildfly-cloud-galleon-pack:2.0.1.Final</wildfly.cloud-feature-pack.location>
+        <wildfly.ee-channel.location></wildfly.ee-channel.location> <!-- TODO: add channel configuration to wildfly-maven-plugin -->
     </properties>
 
     <build>
@@ -114,6 +132,42 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>${wildfly-maven-plugin.groupId}</groupId>
+                <artifactId>${wildfly-maven-plugin.artifactId}</artifactId>
+                <version>${wildfly-maven-plugin.version}</version>
+                <configuration>
+                    <!-- some tests check for the provisioned galleon layers -->
+                    <record-provisioning-state>true</record-provisioning-state>
+                    <feature-packs>
+                        <feature-pack>
+                            <location>${wildfly.ee-feature-pack.location}</location>
+                        </feature-pack>
+                        <feature-pack>
+                            <location>${wildfly.cloud-feature-pack.location}</location>
+                        </feature-pack>
+                    </feature-packs>
+                    <layers>
+                        <layer>cloud-default-config</layer>
+                        <layer>web-clustering</layer>
+                        <layer>ejb-dist-cache</layer>
+                    </layers>
+                    <galleon-options>
+                        <!-- this flag is super necessary: otherwise wildfly-maven-plugin and
+                                wildfly-jar-maven-plugin would collide  -->
+                        <jboss-fork-embedded>true</jboss-fork-embedded>
+                    </galleon-options>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

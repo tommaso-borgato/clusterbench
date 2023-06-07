@@ -123,6 +123,42 @@ Once finished, remove everything using:
 
     helm uninstall clusterbench-from-chart
 
+----------------------
+
+### Using Binary Build
+
+Once builing the application with e.g. `mvn clean install -DskipTests -Denforcer.skip`,
+you can deploy it on OpenShift using a binary build from directory:
+
+    oc new-build --name=wildfly-build-from-server \
+        --labels=intersmash.app=wildfly-test-app \
+        --binary=true \
+        --strategy=source \
+        --env=ADMIN_USERNAME=admin \
+        --env=ADMIN_PASSWORD=pass.1234 \
+        --image=quay.io/wildfly/wildfly-s2i-jdk11:latest
+
+    oc start-build wildfly-build-from-server \
+        --from-dir=./clusterbench-ee10-ear/target/server \
+        --follow
+
+The former command will trigger a binary build on OpenShift;
+Once the binary build has completed, you can start an application with e.g.:
+
+    oc new-app wildfly-build-from-server
+
+Alternatively, you can use the EAP Operator and create a custom resource such as:
+
+    apiVersion: wildfly.org/v1alpha1
+    kind: WildFlyServer
+    metadata:
+    name: wildfly-build-from-server
+    spec:
+    applicationImage: image-registry.openshift-image-registry.svc:5000/eap7-2062/wildfly-build-from-server
+    replicas: 1
+
+Just make sure you replace `image-registry.openshift-image-registry.svc:5000/eap7-2062/wildfly-build-from-server` with
+the correct name of your image (check `Image repository` it in the ImageStream `wildfly-build-from-server`);
 
 Scenario Servlets
 -----------------
