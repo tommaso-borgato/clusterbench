@@ -17,7 +17,7 @@ public class SerialBean implements Serializable {
     private byte[] cargo;
     public static final String CARGOKB_SYSTEM_PROPERTY = "org.jboss.test.clusterbench.cargokb";
     public static final int CARGOKB;
-    public static final int DEFAULT_CARGOKB = 4;
+    public static final int DEFAULT_CARGOKB = 1;
 
     static {
         int cargokb;
